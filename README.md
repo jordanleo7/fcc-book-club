@@ -1,3 +1,20 @@
+This project is based on freeCodeCamp's Manage a Book Trading Club project:
+https://www.freecodecamp.org/challenges/manage-a-book-trading-club
+
+User Story: I can view all books posted by every user.
+
+User Story: I can add a new book.
+
+User Story: I can update my settings to store my full name, city, and state.
+
+User Story: I can propose a trade and wait for the other user to accept the trade.
+
+
+
+/////
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
