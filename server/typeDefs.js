@@ -1,13 +1,15 @@
 const typeDefs = `
 
 type User {
+  id: ID
   username: String
   fullname: String
   city: String
-  location: String
+  state: String
 }
 
 type Book {
+  id: ID
   title: String
   author: String
   summary: String
@@ -15,12 +17,23 @@ type Book {
 }
 
 type Query {
+  users: [User]
   books: [Book]
 }
 
 type Mutation {
-  addBook(title: String!, author: String, summary: String, cover: String): Book
-  addUser(username: String!): User
+  addUser(username: String!, fullname: String!, city: String!, state: String!): User
+  addBook(title: String!, author: String!, summary: String!, cover: String): Book
+}
+
+type Subscription {
+  bookAdded(repoName: String!): Book
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
 }
 
 `;

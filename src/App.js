@@ -1,24 +1,16 @@
 import React, { Component } from 'react';
+import { ApolloProvider, Query } from 'react-apollo';
 import logo from './logo.svg';
 import './App.css';
-import ApolloClient from 'apollo-boost';
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { HttpLink } from 'apollo-link-http';
 import gql from "graphql-tag";
-import { ApolloProvider, Query } from 'react-apollo';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql'
+  link: new HttpLink({ uri: 'http://localhost:4000/graphql' }),
+  cache: new InMemoryCache()
 });
-
-
-client.query({
-  query: gql`
-    {
-      books {
-        name
-      }      
-    }
-  `
-}).then(result => console.log(result));
 
 const Books = () => (
   <Query query={gql`
