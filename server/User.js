@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const userSchema = newSchema({
+const userSchema = new Schema({
   username: String,
   fullname: String,
   city: String,
-  state: String,
-  inventory: Array
+  state: String
 })
 module.exports = mongoose.model('book-trading-club-user', userSchema);

@@ -1,23 +1,25 @@
-const books = [{
-  id: 1,
-  name: 'book1'
-},{
-  id: 2,
-  name: 'book2'
-}];
-let nextId = 3;
+const Book = require('./Book');
+const User = require('./User');
 
 const resolvers = {
   Query: {
-    books: () => {
-      return books;
+    books() {
+      return Book.find({});
     }
   },
   Mutation: {
-    addBook: (root, args) => {
-      const newBook = { id: nextId++, name: args.name };
-      books.push(newBook);
-      return newBook;
+    addBook: (obj, args) => {
+      const newBook = new Book({ 
+        title: args.title, 
+        author: args.author 
+      });
+      return newBook.save();
+    },
+    addUser: (obj, args) => {
+      const newUser = new User({
+        username: args.username
+      });
+      return newUser.save();
     }
   }
 }

@@ -24,7 +24,7 @@ const Books = () => (
   <Query query={gql`
     {
       books {
-        name
+        title
       }
     }
     `}
@@ -32,9 +32,10 @@ const Books = () => (
       {({ loading, error, data }) => {
         if (loading) return <p>Loading</p>;
         if (error) return <p>Error</p>;
+        console.log(data);
         return data.books.map((book) => (
-          <div key={book.name}>
-          <p>{`book name: ${book.name}`}</p>
+          <div key={book.title}>
+          <p>{`book title: ${book.title}`}</p>
           </div> 
         ));
       }}

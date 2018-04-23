@@ -1,19 +1,25 @@
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors');
+const mongoose = require('mongoose');
 const { graphqlExpress, graphiqlExpress} = require('apollo-server-express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 const { execute, subscribe } = require('graphql');
 const { createServer } = require('http');
 const { PubSub } = require('graphql-subscriptions');
 const { SubscriptionServer } = require('subscriptions-transport-ws');
-const schema = require('./schema');
-const mongoose = require('mongoose');
+// Create GraphQL Schema
+const typeDefs = require('./typeDefs');
+const resolvers = require('./resolvers');
+const { makeExecutableSchema } = require('graphql-tools');
+const myGraphQLSchema = makeExecutableSchema({ typeDefs, resolvers });
 
 const PORT = 4000;
 const server = express();
 
-server.use('*', cors({ origin: `http://localhost:${PORT}`}));
+server.use(cors());
+server.use(bodyParser.urlencoded({ extended: true }));
+server.use(bodyParser.json());
 
 // mongoose
 mongoose.connect(process.env.MONGO_URI);
@@ -21,7 +27,7 @@ mongoose.connection.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
-server.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+server.use('/graphql', bodyParser.json(), graphqlExpress({ schema: myGraphQLSchema }));
 
 server.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
@@ -39,7 +45,7 @@ websocketServer.listen(PORT, () => {
   new SubscriptionServer({
     execute,
     subscribe,
-    schema
+    schema: myGraphQLSchema
   }, {
     server: websocketServer,
     path: '/subscriptions',
