@@ -14,7 +14,8 @@ const resolvers = {
     addUser: (obj, args) => {
       const newUser = new User({
         username: args.username,
-        fullname: args.fullname,
+        givenName: args.givenName,
+        familyName: args.familyName,
         city: args.city,
         state: args.state
       });

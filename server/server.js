@@ -2,6 +2,7 @@ const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
 const mongoose = require('mongoose');
+const passport = require('passport');
 const { graphqlExpress, graphiqlExpress} = require('apollo-server-express');
 const bodyParser = require('body-parser');
 const { PubSub } = require('graphql-subscriptions');
@@ -16,6 +17,21 @@ const myGraphQLSchema = makeExecutableSchema({ typeDefs, resolvers });
 
 const PORT = 4000;
 const app = express();
+
+const cookieSession = require('cookie-session');
+app.use(cookieSession({
+  // 24 hour session
+  maxAge: 24 * 60 * 60 * 1000,
+  keys: [process.env.SESSION_COOKIE_KEY]
+}));
+
+// Initialize Passport
+require('./passport');
+app.use(passport.initialize());
+app.use(passport.session());
+
+const authRouter = require('./authRouter');
+app.use('/', authRouter);
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -2,8 +2,10 @@ const typeDefs = `
 
 type User {
   id: ID
+  googleId: String
   username: String
-  fullname: String
+  givenName: String
+  familyName: String
   city: String
   state: String
 }
@@ -17,13 +19,17 @@ type Book {
 }
 
 type Query {
+  user: User
   users: [User]
+  book: Book
   books: [Book]
 }
 
 type Mutation {
-  addUser(username: String!, fullname: String!, city: String!, state: String!): User
+  addUser(username: String!, givenName: String!, familyName: String!, city: String, state: String): User
+  editUser(username: String!, givenName: String!, familyName: String!, city: String, state: String): User
   addBook(title: String!, author: String!, summary: String!, cover: String): Book
+  editBook(title: String!, author: String!, summary: String!, cover: String): Book
 }
 
 type Subscription {
