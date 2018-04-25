@@ -21,6 +21,7 @@ type Book {
 type Query {
   user: User
   users: [User]
+  signedInUser: User
   book: Book
   books: [Book]
 }

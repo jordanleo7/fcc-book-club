@@ -13,14 +13,13 @@ authRouter.get('/auth/google', passport.authenticate('google', {
 }));
 
 authRouter.get('/auth/google/redirect', passport.authenticate('google'), (req, res) => {
-  // dev mode: http://localhost:3000/   prod mode: /
   res.redirect('http://localhost:3000/');
 });
 
 const authCheck = (req, res, next) => {
   if (req.user) {
     // If logged in
-    next();
+    next(req.user);
   } else {
     // If user is not logged in
     res.redirect('http://localhost:4000/auth/google');

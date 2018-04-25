@@ -6,7 +6,17 @@ const resolvers = {
     users() {
       return User.find({});
     },
+    signedInUser(obj, args, context) {
+      console.log('hello', context.user);
+      if (context.user) {
+        console.log(User.findOne({ _id: context.user._id }))
+        return User.findOne({ _id: context.user._id });
+      } else {
+        return null
+      }
+    },
     books() {
+      console.log(Book.find({}))
       return Book.find({});
     }
   },

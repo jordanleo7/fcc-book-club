@@ -9,9 +9,10 @@ import { HttpLink } from 'apollo-link-http';
 import Home from "./components/Home";
 import AllBooks from "./components/AllBooks";
 import Nav from "./components/Nav";
+import Profile from "./components/Profile";
 
 const client = new ApolloClient({
-  link: new HttpLink({ uri: 'http://localhost:4000/graphql' }),
+  link: new HttpLink({ uri: 'http://localhost:4000/graphql'}),
   cache: new InMemoryCache()
 });
 
@@ -24,6 +25,7 @@ class App extends Component {
             <Nav/>
             <Route exact path="/" component={Home}/>
             <Route path="/allbooks" component={AllBooks}/>
+            <Route path="/profile" component={Profile}/>
           </div>
         </BrowserRouter>
       </ApolloProvider>

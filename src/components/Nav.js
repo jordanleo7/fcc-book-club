@@ -23,8 +23,8 @@ class SignInButton extends Component {
     return (
       <div>
         { this.state.isSignedIn 
-        ? <a href={"http://localhost:4000/auth/logout"}>Sign out</a>
-        : <a href={"http://localhost:4000/auth/google"}>Sign in</a>
+        ? <div><Link to={"/profile"}>MyProfile</Link>{" "}<a href={"http://localhost:4000/auth/logout"}>Sign out</a></div>
+        : <div><a href={"http://localhost:4000/auth/google"}>Sign in</a></div>
         }
       </div>
     )
@@ -36,7 +36,7 @@ class Nav extends Component {
   render() {
     return (
       <nav>
-        <Link to={"/"} className="navbar-brand">Book Trading Club</Link>
+        <Link to={"/"}>Book Trading Club</Link>
         <SignInButton/>
       </nav>
     )
