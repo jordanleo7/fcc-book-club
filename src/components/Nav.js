@@ -12,7 +12,7 @@ class SignInButton extends Component {
   componentDidMount() {
     axios.get('/auth/isSignedIn')
     .then((response) => {
-      console.log(response)
+      console.log('/auth/isSignedIn response:', response)
       this.setState({ isSignedIn: response.data})
     })
     .catch((error) => {

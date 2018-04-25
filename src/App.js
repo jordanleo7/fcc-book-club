@@ -12,7 +12,10 @@ import Nav from "./components/Nav";
 import Profile from "./components/Profile";
 
 const client = new ApolloClient({
-  link: new HttpLink({ uri: 'http://localhost:4000/graphql'}),
+  link: new HttpLink({ 
+    uri: 'http://localhost:4000/graphql', 
+    credentials: 'include' 
+  }),
   cache: new InMemoryCache()
 });
 

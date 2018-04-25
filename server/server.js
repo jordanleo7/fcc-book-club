@@ -21,20 +21,26 @@ const User = require('./User');
 const PORT = 4000;
 const app = express();
 
-const SECRET = process.env.SESSION_COOKIE_KEY;
-const addUser = async (req) => {
+//const SECRET = process.env.SESSION_COOKIE_KEY;
+/*const addUser = async (req) => {
   const token = req.headers.authorization;
   /*try {
     const { user } = await jwt.verify(token, SECRET);
     req.user = user;
   } catch (err) {
     console.log(err);
-  }*/
+  }
   req.next();
 };
+*/
 
-app.use(addUser);
-app.use(cors()); //'*', cors({ origin: 'http://localhost:3000', credentials: true }));
+//app.use(addUser);
+var corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true // <-- REQUIRED backend setting
+};
+app.use(cors(corsOptions));
+//app.use(cors()); //'*', cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -65,8 +71,6 @@ app.use(
   graphqlExpress(req => ({
     schema,
     context: { 
-      User,
-      //SECRET,
       user: req.user 
     } 
   }))

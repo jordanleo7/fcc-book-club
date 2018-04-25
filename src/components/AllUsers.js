@@ -14,7 +14,6 @@ const AllUsers = () => (
       {({ loading, error, data }) => {
         if (loading) return <p>Loading</p>;
         if (error) return <p>Error</p>;
-        console.log(data);
         return data.users.map((user) => (
           <div key={user.username}>
           <p>{`username: ${user.username}`}</p>
