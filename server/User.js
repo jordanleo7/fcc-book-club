@@ -6,6 +6,6 @@ const userSchema = new Schema({
   givenName: String,
   familyName: String,
   city: String,
-  state: String
+  myState: String
 })
 module.exports = mongoose.model('book-trading-club-user', userSchema);

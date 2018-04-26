@@ -7,7 +7,7 @@ type User {
   givenName: String
   familyName: String
   city: String
-  state: String
+  myState: String
 }
 
 type Book {
@@ -27,8 +27,8 @@ type Query {
 }
 
 type Mutation {
-  addUser(username: String!, givenName: String!, familyName: String!, city: String, state: String): User
-  editUser(username: String!, givenName: String!, familyName: String!, city: String, state: String): User
+  addUser(username: String!, givenName: String!, familyName: String!, city: String, myState: String): User
+  editUser(username: String!, givenName: String!, familyName: String!, city: String, myState: String): User
   addBook(title: String!, author: String!, summary: String!, cover: String): Book
   editBook(title: String!, author: String!, summary: String!, cover: String): Book
 }

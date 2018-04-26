@@ -25,9 +25,22 @@ const resolvers = {
         givenName: args.givenName,
         familyName: args.familyName,
         city: args.city,
-        state: args.state
+        myState: args.myState
       });
       return newUser.save();
+    },
+    editUser: (obj, args, context) => {
+      return User.findByIdAndUpdate(context.user._id,
+        {
+          $set: {
+            username: args.username,
+            givenName: args.givenName,
+            familyName: args.familyName,
+            city: args.city,
+            myState: args.myState
+          }
+        }, { new: true }
+      )
     },
     addBook: (obj, args) => {
       const newBook = new Book({ 

@@ -9,7 +9,7 @@ const signedInUser = gql`
       givenName
       familyName
       city
-      state
+      myState
     }
   }
 `
