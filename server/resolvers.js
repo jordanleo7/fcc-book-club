@@ -7,7 +7,6 @@ const resolvers = {
       return User.find({});
     },
     signedInUser(obj, args, context) {
-      console.log(context);
       if (context.user) {
         return User.findById(context.user._id);
       } else {
@@ -30,17 +29,21 @@ const resolvers = {
       return newUser.save();
     },
     editUser: (obj, args, context) => {
-      return User.findByIdAndUpdate(context.user._id,
-        {
-          $set: {
-            username: args.username,
-            givenName: args.givenName,
-            familyName: args.familyName,
-            city: args.city,
-            myState: args.myState
-          }
-        }, { new: true }
-      )
+      if (context.user) {
+        return User.findByIdAndUpdate(context.user._id,
+          {
+            $set: {
+              username: args.username,
+              givenName: args.givenName,
+              familyName: args.familyName,
+              city: args.city,
+              myState: args.myState
+            }
+          }, { new: true }
+        )
+      } else {
+        return null
+      }
     },
     addBook: (obj, args) => {
       const newBook = new Book({ 

@@ -30,7 +30,6 @@ class EditProfile extends Component {
       redirectToNewPage: false
     };
     this.handleInputChange = this.handleInputChange.bind(this);
-    //this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInputChange(event) {
@@ -42,9 +41,33 @@ class EditProfile extends Component {
       [name]: value
     });
   }
+  // componentWillMount + componentWillReceiveProps ensures inputs are filled in whether clicking the edit profile link, or refreshing the edit profile page
+  componentWillMount() {
+    if (this.props.data.signedInUser) {
+      this.setState({ 
+        username: this.props.data.signedInUser.username,
+        givenName: this.props.data.signedInUser.givenName,
+        familyName: this.props.data.signedInUser.familyName,
+        city: this.props.data.signedInUser.city,
+        myState: this.props.data.signedInUser.myState
+      })
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.data.signedInUser) {
+      this.setState({ 
+        username: newProps.data.signedInUser.username,
+        givenName: newProps.data.signedInUser.givenName,
+        familyName: newProps.data.signedInUser.familyName,
+        city: newProps.data.signedInUser.city,
+        myState: newProps.data.signedInUser.myState
+      })
+    }
+  }
 
   render() {
-
+    console.log(this.props);
     if (this.state.redirectToNewPage) {
       return <Redirect to="/profile" />;
     }
@@ -72,6 +95,7 @@ class EditProfile extends Component {
               city: this.state.city,
               myState: this.state.myState
             }})
+            this.setState({ redirectToNewPage: true })
           }}>
 
           <div>
@@ -134,7 +158,7 @@ class EditProfile extends Component {
           </label>
           </div>
 
-          <button type="submit">Edit Profile</button>
+          <button type="submit">Save</button>
 
           </form>
         </div>
@@ -144,4 +168,4 @@ class EditProfile extends Component {
   };
 }
 
-export default EditProfile
+export default graphql(signedInUser)(EditProfile)

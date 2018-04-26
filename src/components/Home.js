@@ -8,8 +8,6 @@ const Home = () => (
   <div>
     <h2>Book Trading Club</h2>
     <AllBooks/>
-    <AllUsers/>
-    <SignedInUser/>
   </div>
 )
 

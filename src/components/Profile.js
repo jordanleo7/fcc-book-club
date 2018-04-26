@@ -15,7 +15,7 @@ class Profile extends Component {
           <ul>
             <li>{this.props.data.signedInUser.username}</li>
             <li>{this.props.data.signedInUser.givenName} {this.props.data.signedInUser.familyName}</li>
-            <li>{this.props.data.signedInUser.city} {this.props.data.signedInUser.myState}</li>
+            <li>{this.props.data.signedInUser.city}, {this.props.data.signedInUser.myState}</li>
           </ul>
           <Link to={"/editprofile"}>Edit Profile</Link>
         </div>
