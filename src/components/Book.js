@@ -13,6 +13,10 @@ const Book = (props) => (
           author
           summary
           cover
+          ownedBy {
+            id
+            username
+          }
         }
       }
     `}
@@ -23,8 +27,12 @@ const Book = (props) => (
         if (loading) return <p>Loading</p>;
         if (error) return <p>Error</p>;
         return (
-          <div key={data.book.title}>
-          <p>{data.book.title}</p><p>by {data.book.author}</p>
+          <div>
+          <h3>Book</h3>
+          <p>Title: {data.book.title}</p>
+          <p>Author: {data.book.author}</p>
+          <p>Summary: {data.book.summary}</p>
+          <span>Request this book from {data.book.ownedBy[0].username}</span>
           </div> 
         );
       }}
