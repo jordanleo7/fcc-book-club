@@ -6,6 +6,7 @@ const userSchema = new Schema({
   givenName: String,
   familyName: String,
   city: String,
-  myState: String
+  myState: String,
+  inventory: [{ type: Schema.Types.ObjectId, ref: 'Book' }]
 })
 module.exports = mongoose.model('book-trading-club-user', userSchema);

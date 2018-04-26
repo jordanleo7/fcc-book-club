@@ -2,6 +2,16 @@ const Book = require('./Book');
 const User = require('./User');
 
 const resolvers = {
+  User: {
+    inventory(x) { 
+      return Book.find({ _id: x.inventory }) 
+    }
+  },
+  Book: {
+    ownedBy(x) {
+      return User.find({ _id: x.ownedBy })
+    }
+  },
   Query: {
     users() {
       return User.find({});
@@ -15,6 +25,10 @@ const resolvers = {
     },
     books() {
       return Book.find({});
+    },
+    book(obj, args) {
+      console.log('book args: ', args)
+      return Book.findById(args.id);
     }
   },
   Mutation: {
@@ -45,14 +59,22 @@ const resolvers = {
         return null
       }
     },
-    addBook: (obj, args) => {
-      const newBook = new Book({ 
-        title: args.title, 
-        author: args.author,
-        summary: args.summary,
-        cover: args.cover
-      });
-      return newBook.save();
+    addBook: (obj, args, context) => {
+      if (context.user) {
+        const newBook = new Book({ 
+          title: args.title, 
+          author: args.author,
+          summary: args.summary,
+          cover: args.cover,
+          ownedBy: context.user._id
+        });
+        return newBook.save().then((newBook) => {
+          return User.findByIdAndUpdate(context.user._id,
+            { $push: { inventory: newBook._id }
+            }
+          )
+        })
+      }
     }
   },
   Subscription: {

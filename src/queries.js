@@ -10,6 +10,13 @@ const signedInUser = gql`
       familyName
       city
       myState
+      inventory {
+        id
+        title
+        author
+        summary
+        cover
+      }
     }
   }
 `

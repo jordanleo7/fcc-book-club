@@ -6,7 +6,7 @@ import SignedInUser from "./SignedInUser";
 
 const Home = () => (
   <div>
-    <h2>Book Trading Club</h2>
+    <h3>All Books</h3>
     <AllBooks/>
   </div>
 )

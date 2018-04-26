@@ -8,6 +8,7 @@ type User {
   familyName: String
   city: String
   myState: String
+  inventory: [Book]
 }
 
 type Book {
@@ -16,13 +17,14 @@ type Book {
   author: String
   summary: String
   cover: String
+  ownedBy: [User]
 }
 
 type Query {
   user: User
   users: [User]
   signedInUser: User
-  book: Book
+  book(id: String!): Book
   books: [Book]
 }
 

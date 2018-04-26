@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import gql from "graphql-tag";
+import { Link } from "react-router-dom";
 
 const AllBooks = () => (
   <Query query={gql`
     {
       books {
+        id
         title
+        author
+        summary
+        cover
       }
     }
     `}
@@ -16,7 +21,7 @@ const AllBooks = () => (
         if (error) return <p>Error</p>;
         return data.books.map((book) => (
           <div key={book.title}>
-          <p>{`book title: ${book.title}`}</p>
+          <Link to={`/book/${book.id}`}>{book.title}</Link><p>by {book.author}</p>
           </div> 
         ));
       }}
