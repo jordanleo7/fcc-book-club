@@ -4,6 +4,11 @@ import gql from "graphql-tag";
 import { signedInUser } from '../queries';
 import { Link } from "react-router-dom";
 
+const navRightStyle = {
+  float: 'right', 
+  margin: '21px 0 0 0'
+}
+
 class SignedInUser extends Component {
 
   SignedInUser() {
@@ -23,7 +28,7 @@ class SignedInUser extends Component {
 
   render() {
     return (
-      <div>
+      <div style={navRightStyle}>
         {this.SignedInUser()}
       </div>
     )

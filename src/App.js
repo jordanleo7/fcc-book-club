@@ -29,13 +29,15 @@ class App extends Component {
     return (
       <ApolloProvider client={client}>
         <BrowserRouter>
-          <div>
+          <div style={{margin: '0 16px'}}>
             <Nav/>
+            <div style={{clear: 'both'}}>
             <Route exact path="/" component={Home}/>
             <Route path="/allbooks" component={AllBooks}/>
             <Route path="/book/:id" component={Book}/>
             <Route path="/profile" component={Profile}/>
             <Route path="/editprofile" component={EditProfile}/>
+            </div>
           </div>
         </BrowserRouter>
       </ApolloProvider>

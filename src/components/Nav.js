@@ -7,7 +7,7 @@ class Nav extends Component {
   render() {
     return (
       <nav>
-        <Link to={"/"}><h3>Book Trading Club</h3></Link>
+        <Link to={"/"} style={{float: 'left'}}><h3>Book Trading Club</h3></Link>
         <SignedInUser/>
       </nav>
     )
