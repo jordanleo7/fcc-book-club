@@ -16,9 +16,37 @@ const signedInUser = gql`
         author
         summary
         cover
+        ownedBy {
+          id
+          username
+        }
+        requestedBy {
+          id
+          username
+        }
       }
     }
   }
 `
 
-export { signedInUser }
+const requestBook = gql`
+  mutation requestBook ($id: String!) {
+    requestBook(id: $id) {
+      id
+      title
+      author
+      summary
+      cover
+      ownedBy {
+        id
+        username
+      }
+      requestedBy {
+        id
+        username
+      }
+    }
+  }
+`
+
+export { signedInUser, requestBook }

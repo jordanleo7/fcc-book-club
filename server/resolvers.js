@@ -3,13 +3,16 @@ const User = require('./User');
 
 const resolvers = {
   User: {
-    inventory(x) { 
-      return Book.find({ _id: x.inventory }) 
+    inventory(oid) { 
+      return Book.find({ _id: oid.inventory }) 
     }
   },
   Book: {
-    ownedBy(x) {
-      return User.find({ _id: x.ownedBy })
+    ownedBy(oid) {
+      return User.findOne({ _id: oid.ownedBy })
+    },
+    requestedBy(oid) {
+      return User.findOne({ _id: oid.requestedBy })
     }
   },
   Query: {
@@ -75,13 +78,20 @@ const resolvers = {
           )
         })
       }
-    }
+    }, // requestBook(id: String!): Book
+    /*requestBook: (obj, args, context) => {
+      console.log('reqbook:',obj, args, context);
+      return Book.findById(args.id, (err, book) => {
+        book.requestedBy.push(context.user._id);
+        return book.save();
+      })
+    }*/
   },
-  Subscription: {
+  /*Subscription: {
     bookAdded: {
       subscribe: () => pubsub.asyncIterator('bookAdded')
     }
-  }
+  }*/
 }
 
 module.exports = resolvers;

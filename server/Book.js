@@ -5,6 +5,7 @@ const bookSchema = new Schema({
   author: String,
   summary: String,
   cover: String,
-  ownedBy: [{ type: Schema.Types.ObjectId, ref: 'User' }]
+  ownedBy: { type: Schema.Types.ObjectId, ref: 'User' },
+  requestedBy: { type: Schema.Types.ObjectId, ref: 'User' }
 })
 module.exports = mongoose.model('book-trading-club-book', bookSchema);

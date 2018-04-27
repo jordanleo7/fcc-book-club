@@ -12,6 +12,14 @@ const AllBooks = () => (
         author
         summary
         cover
+        ownedBy {
+          id
+          username
+        }
+        requestedBy {
+          id
+          username
+        }
       }
     }
     `}

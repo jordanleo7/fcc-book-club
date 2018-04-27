@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Query } from 'react-apollo';
+import { Query, graphql } from 'react-apollo';
 import gql from "graphql-tag";
 import { Link } from "react-router-dom";
+import { requestBook } from "../queries";
 
 const Book = (props) => (
   <Query 
@@ -14,6 +15,10 @@ const Book = (props) => (
           summary
           cover
           ownedBy {
+            id
+            username
+          }
+          requestedBy {
             id
             username
           }
@@ -32,11 +37,13 @@ const Book = (props) => (
           <p>Title: {data.book.title}</p>
           <p>Author: {data.book.author}</p>
           <p>Summary: {data.book.summary}</p>
-          <span>Request this book from {data.book.ownedBy[0].username}</span>
+          <span>Request this book from {data.book.ownedBy.username}</span>
+          <button>Request</button>
           </div> 
         );
       }}
   </Query>
 );
 
+//export default graphql(requestBook)(Book)
 export default Book
