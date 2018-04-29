@@ -79,13 +79,20 @@ const resolvers = {
         })
       }
     }, // requestBook(id: String!): Book
-    /*requestBook: (obj, args, context) => {
-      console.log('reqbook:',obj, args, context);
-      return Book.findById(args.id, (err, book) => {
-        book.requestedBy.push(context.user._id);
-        return book.save();
-      })
-    }*/
+    requestBook: (obj, args, context) => {
+      console.log('reqbook:',obj, args, context.user);
+
+      if (context.user) {
+
+        return Book.findById(args.id, (err, book) => {
+          if (err) return err;
+          book.requestedBy = context.user._id;
+          return book.save();
+        })
+
+      }
+
+    }
   },
   /*Subscription: {
     bookAdded: {

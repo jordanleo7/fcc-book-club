@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Query, graphql } from 'react-apollo';
+import { Query, Mutation, graphql } from 'react-apollo';
 import gql from "graphql-tag";
 import { Link } from "react-router-dom";
 import { requestBook } from "../queries";
@@ -38,12 +38,25 @@ const Book = (props) => (
           <p>Author: {data.book.author}</p>
           <p>Summary: {data.book.summary}</p>
           <span>Request this book from {data.book.ownedBy.username}</span>
-          <button>Request</button>
+            <Mutation mutation={requestBook}>
+              {(requestBook) => (
+                <button 
+                  onClick={() => {
+                    console.log('request', data);
+                    requestBook({
+                      variables: { id: data.book.id }
+                    })
+                  }}
+                >
+                  Request
+                </button>
+              )}
+            </Mutation>
           </div> 
         );
       }}
   </Query>
 );
 
-//export default graphql(requestBook)(Book)
-export default Book
+export default graphql(requestBook)(Book)
+//export default Book
