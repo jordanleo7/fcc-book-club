@@ -10,20 +10,53 @@ const signedInUser = gql`
       familyName
       city
       myState
-      inventory {
+    }
+  }
+`
+
+const allBooks = gql`
+  {
+    books {
+      id
+      title
+      author
+      summary
+      cover
+      ownedBy {
         id
-        title
-        author
-        summary
-        cover
-        ownedBy {
-          id
-          username
-        }
-        requestedBy {
-          id
-          username
-        }
+        username
+        city
+        myState
+      }
+      requestedBy {
+        id
+        username
+        city
+        myState
+      }
+    }
+  }
+`
+
+const signedInUsersBooks = gql`
+  {
+    signedInUsersBooks {
+      id
+      title
+      author
+      summary
+      cover
+      ownedBy {
+        id
+        username
+        city
+        myState
+      }
+      requestedBy {
+        id
+        username
+        city
+        myState
       }
     }
   }
@@ -40,13 +73,41 @@ const requestBook = gql`
       ownedBy {
         id
         username
+        city
+        myState
       }
       requestedBy {
         id
         username
+        city
+        myState
       }
     }
   }
 `
 
-export { signedInUser, requestBook }
+const acceptBookRequest = gql`
+  mutation acceptBookRequest($id: String!, $requestedBy: String!) {
+    acceptBookRequest(id: $id, requestedBy: $requestedBy) {
+      id
+      title
+      author
+      summary
+      cover
+      ownedBy {
+        id
+        username
+        city
+        myState
+      }
+      requestedBy {
+        id
+        username
+        city
+        myState
+      }
+    }
+  }
+`
+
+export { signedInUser, allBooks, requestBook, acceptBookRequest, signedInUsersBooks }

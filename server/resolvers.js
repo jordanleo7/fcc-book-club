@@ -2,11 +2,11 @@ const Book = require('./Book');
 const User = require('./User');
 
 const resolvers = {
-  User: {
+  /*User: {
     inventory(oid) { 
       return Book.find({ _id: oid.inventory }) 
     }
-  },
+  }, Inventory removed for now */
   Book: {
     ownedBy(oid) {
       return User.findOne({ _id: oid.ownedBy })
@@ -22,6 +22,13 @@ const resolvers = {
     signedInUser(obj, args, context) {
       if (context.user) {
         return User.findById(context.user._id);
+      } else {
+        return null
+      }
+    },
+    signedInUsersBooks(obj, args, context) {
+      if (context.user) {
+        return Book.find({ ownedBy: context.user.id })
       } else {
         return null
       }
@@ -71,27 +78,34 @@ const resolvers = {
           cover: args.cover,
           ownedBy: context.user._id
         });
-        return newBook.save().then((newBook) => {
+        return newBook.save()/*.then((newBook) => {
           return User.findByIdAndUpdate(context.user._id,
             { $push: { inventory: newBook._id }
             }
           )
-        })
+        }) This code will update the user's inventory. Removed inventory for now */
       }
     }, // requestBook(id: String!): Book
     requestBook: (obj, args, context) => {
       console.log('reqbook:',obj, args, context.user);
-
       if (context.user) {
-
         return Book.findById(args.id, (err, book) => {
           if (err) return err;
           book.requestedBy = context.user._id;
           return book.save();
         })
-
       }
-
+    }, // acceptBookRequest(id: String!): Book
+    acceptBookRequest: (obj, args, context) => {
+      console.log('accept request resolver', obj, args, context.user);
+      if (context.user) {
+        return Book.findByIdAndUpdate(args.id, 
+          { $set: { 
+            ownedBy: args.requestedBy, 
+            requestedBy: undefined 
+          } }, { new: true }
+        )
+      }
     }
   },
   /*Subscription: {

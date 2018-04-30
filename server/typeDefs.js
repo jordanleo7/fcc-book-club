@@ -8,7 +8,6 @@ type User {
   familyName: String
   city: String
   myState: String
-  inventory: [Book]
 }
 
 type Book {
@@ -25,6 +24,7 @@ type Query {
   user: User
   users: [User]
   signedInUser: User
+  signedInUsersBooks: [Book]
   book(id: String!): Book
   books: [Book]
 }
@@ -35,6 +35,7 @@ type Mutation {
   addBook(title: String!, author: String!, summary: String!, cover: String): Book
   editBook(title: String!, author: String!, summary: String!, cover: String): Book
   requestBook(id: String!): Book
+  acceptBookRequest(id: String!, requestedBy: String!): Book
 }
 
 type Subscription {
