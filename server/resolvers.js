@@ -91,8 +91,10 @@ const resolvers = {
       if (context.user) {
         return Book.findById(args.id, (err, book) => {
           if (err) return err;
-          book.requestedBy = context.user._id;
-          return book.save();
+          if (book.ownedBy.toString() !== context.user._id.toString()) {
+            book.requestedBy = context.user._id;
+            return book.save();
+          }
         })
       }
     }, // acceptBookRequest(id: String!): Book
@@ -105,6 +107,17 @@ const resolvers = {
             requestedBy: undefined 
           } }, { new: true }
         )
+      }
+    }, // (id: String!): Book
+    denyBookRequest: (obj, args, context) => {
+      console.log('deny request resolver', obj, args, context.user);
+      if (context.user) {
+        return Book.findById(args.id, (err, book) => {
+          if (book.ownedBy.toString() === context.user._id.toString()) {
+            book.requestedBy = undefined;
+            return book.save();
+          }
+        })
       }
     }
   },

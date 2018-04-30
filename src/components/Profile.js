@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { graphql, compose, Mutation } from 'react-apollo';
 import gql from "graphql-tag";
 import { Link } from "react-router-dom";
-import { signedInUser, signedInUsersBooks, acceptBookRequest } from '../queries';
+import { signedInUser, signedInUsersBooks, acceptBookRequest, denyBookRequest } from '../queries';
 import AddBook from './AddBook';
 
 class Profile extends Component {
@@ -48,7 +48,7 @@ class Profile extends Component {
                               {(acceptBookRequest) => (
                                 <button 
                                   onClick={() => {
-                                    console.log('request', book);
+                                    console.log('accept request', book);
                                     acceptBookRequest({
                                       variables: { id: book.id, requestedBy: book.requestedBy.id }
                                     })
@@ -57,7 +57,22 @@ class Profile extends Component {
                                   Accept
                                 </button>
                               )}
-                            </Mutation> | Decline</div>
+                            </Mutation>                            
+                            
+                            <Mutation mutation={denyBookRequest}>
+                              {(denyBookRequest) => (
+                                <button 
+                                  onClick={() => {
+                                    console.log('decline request', book);
+                                    denyBookRequest({
+                                      variables: { id: book.id }
+                                    })
+                                  }}
+                                >
+                                  Decline
+                                </button>
+                              )}
+                            </Mutation></div>
                         </li>
                       )
                     }
@@ -116,11 +131,12 @@ export default compose(
     }
   }
 `, {name: "signedInUser"}),
-  graphql(acceptBookRequest)
+  graphql(acceptBookRequest),
+  graphql(denyBookRequest)
 )(Profile)
 
 
-/* Using the big compose query export because these options didn't work.
+/* Using the big compose query export because these options didn't work. Use quotation marks in 2nd test?
 
 export default compose(
   graphql(signedInUsersBooks),

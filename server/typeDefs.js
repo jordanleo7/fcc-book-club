@@ -36,6 +36,7 @@ type Mutation {
   editBook(title: String!, author: String!, summary: String!, cover: String): Book
   requestBook(id: String!): Book
   acceptBookRequest(id: String!, requestedBy: String!): Book
+  denyBookRequest(id: String!): Book
 }
 
 type Subscription {

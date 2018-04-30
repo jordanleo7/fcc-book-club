@@ -110,4 +110,28 @@ const acceptBookRequest = gql`
   }
 `
 
-export { signedInUser, allBooks, requestBook, acceptBookRequest, signedInUsersBooks }
+const denyBookRequest = gql`
+  mutation denyBookRequest($id: String!) {
+    denyBookRequest(id: $id) {
+      id
+      title
+      author
+      summary
+      cover
+      ownedBy {
+        id
+        username
+        city
+        myState
+      }
+      requestedBy {
+        id
+        username
+        city
+        myState
+      }
+    }
+  }
+`
+
+export { signedInUser, allBooks, requestBook, acceptBookRequest, signedInUsersBooks, denyBookRequest }
