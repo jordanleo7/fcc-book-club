@@ -6,6 +6,38 @@ import { signedInUser, signedInUsersBooks, acceptBookRequest, denyBookRequest, s
 import AddBook from './AddBook';
 import { connect } from 'mongoose';
 
+const profileContainer = {
+  padding: '8px',
+  textAlign: 'center'
+}
+
+const listStyle = {
+  listStyleType: 'none',
+  margin: '0',
+  padding: '0'
+}
+
+const editProfileLinkContainer = {
+  padding: '16px 0',
+  borderBottom: '1px solid lightgray',
+  borderRadius: '0'
+}
+
+const linkStyle = {
+  color: '#4396C4',
+  textDecoration: 'none',
+}
+
+const buttonApprove = {
+  backgroundColor: 'none',
+  border: 'none',
+  fontSize: '1em',
+  padding: '0',
+  margin: '0',
+  color: '#4396C4',
+  cursor: 'pointer'
+}
+
 class Profile extends Component {
 
   SignedInUser() {
@@ -15,16 +47,18 @@ class Profile extends Component {
     if (this.props.signedInUsersBooks && this.props.signedInUser) {
 
       return (
-        <div>
+        <div style={profileContainer}>
           <div>
             <h3>My Profile</h3>
-            <ul>
+            <ul style={listStyle}>
               <li>{this.props.signedInUser.signedInUser.username}</li>
               <li>{this.props.signedInUser.signedInUser.givenName} {this.props.signedInUser.signedInUser.familyName}</li>
               <li>{this.props.signedInUser.signedInUser.city}, {this.props.signedInUser.signedInUser.myState}</li>
             </ul>
           </div>
-          <Link to={"/editprofile"}>Edit Profile</Link>
+          <div style={editProfileLinkContainer}>
+            <Link to={"/editprofile"} style={linkStyle}>Edit Profile</Link>
+          </div>
           <div>
             <h3>My Books</h3>
               {this.props.signedInUsersBooks.signedInUsersBooks.map((book) => (

@@ -6,7 +6,13 @@ import { Link } from "react-router-dom";
 
 const navRightStyle = {
   float: 'right', 
-  margin: '21px 0 0 0'
+  margin: '21px 0 0 0',
+}
+
+const linkStyle = {
+  color: '#8ADD95',
+  textDecoration: 'none',
+  margin: '0 0 0 8px'
 }
 
 class SignedInUser extends Component {
@@ -18,8 +24,8 @@ class SignedInUser extends Component {
       return (
         <div>
           <span>Hi, {this.props.data.signedInUser.username}!</span>{" "}
-          <Link to={"/profile"}>MyProfile</Link>{" "}
-          <a href={"http://localhost:4000/auth/logout"}>Sign out</a>
+          <Link to={"/profile"} style={linkStyle}>MyProfile</Link>{" "}
+          <a href={"http://localhost:4000/auth/logout"} style={linkStyle}>Sign out</a>
         </div>
       );
     }

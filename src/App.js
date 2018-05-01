@@ -24,7 +24,8 @@ const client = new ApolloClient({
   }),
   cache: new InMemoryCache()
 });
-/*
+
+/* Subscription 
 const wsLink = new WebSocketLink({
   uri: `ws://localhost:4000/`,
   options: {
@@ -44,20 +45,19 @@ const link = split(
   client,
 );
 */
+
 class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
         <BrowserRouter>
-          <div style={{margin: '0 16px'}}>
+          <div>
             <Nav/>
-            <div style={{clear: 'both'}}>
             <Route exact path="/" component={Home}/>
             <Route path="/allbooks" component={AllBooks}/>
             <Route path="/book/:id" component={Book}/>
             <Route path="/profile" component={Profile}/>
             <Route path="/editprofile" component={EditProfile}/>
-            </div>
           </div>
         </BrowserRouter>
       </ApolloProvider>

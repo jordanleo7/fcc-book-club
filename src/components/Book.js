@@ -4,6 +4,28 @@ import gql from "graphql-tag";
 import { Link } from "react-router-dom";
 import { requestBook } from "../queries";
 
+const bookContainer = {
+  padding: '8px',
+  textAlign: 'center'
+}
+
+const placeholderBookCover = {
+  height: '150px',
+  width: '100px',
+  background: '#384253',
+  margin: '0 auto'
+}
+
+const buttonApprove = {
+  backgroundColor: 'none',
+  border: 'none',
+  fontSize: '1em',
+  padding: '0',
+  margin: '0',
+  color: '#4396C4',
+  cursor: 'pointer'
+}
+
 const Book = (props) => (
   <Query 
     query={gql`
@@ -32,15 +54,16 @@ const Book = (props) => (
         if (loading) return <p>Loading</p>;
         if (error) return <p>Error</p>;
         return (
-          <div>
+          <div style={bookContainer}>
           <h3>Book</h3>
+          <div style={placeholderBookCover}></div>
           <p>Title: {data.book.title}</p>
           <p>Author: {data.book.author}</p>
           <p>Summary: {data.book.summary}</p>
-          <span>Request this book from {data.book.ownedBy.username}</span>
             <Mutation mutation={requestBook}>
               {(requestBook) => (
                 <button 
+                  style={buttonApprove}
                   onClick={() => {
                     console.log('request', data);
                     requestBook({
@@ -52,6 +75,7 @@ const Book = (props) => (
                 </button>
               )}
             </Mutation>
+            <span> this book from {data.book.ownedBy.username}</span>
           </div> 
         );
       }}
