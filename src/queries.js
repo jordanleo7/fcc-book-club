@@ -134,4 +134,28 @@ const denyBookRequest = gql`
   }
 `
 
-export { signedInUser, allBooks, requestBook, acceptBookRequest, signedInUsersBooks, denyBookRequest }
+const subscribeToBookUpdates = gql`
+  subscription subscribeToBookUpdates($repoName: String!) {
+    subscribeToBookUpdates(repoName: $repoName) {
+      id
+      title
+      author
+      summary
+      cover
+      ownedBy {
+        id
+        username
+        city
+        myState
+      }
+      requestedBy {
+        id
+        username
+        city
+        myState
+      }
+    }
+  }
+`
+
+export { signedInUser, allBooks, requestBook, acceptBookRequest, signedInUsersBooks, denyBookRequest, subscribeToBookUpdates }

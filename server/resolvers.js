@@ -85,7 +85,7 @@ const resolvers = {
           )
         }) This code will update the user's inventory. Removed inventory for now */
       }
-    }, // requestBook(id: String!): Book
+    },
     requestBook: (obj, args, context) => {
       console.log('reqbook:',obj, args, context.user);
       if (context.user) {
@@ -97,7 +97,7 @@ const resolvers = {
           }
         })
       }
-    }, // acceptBookRequest(id: String!): Book
+    },
     acceptBookRequest: (obj, args, context) => {
       console.log('accept request resolver', obj, args, context.user);
       if (context.user) {
@@ -108,7 +108,7 @@ const resolvers = {
           } }, { new: true }
         )
       }
-    }, // (id: String!): Book
+    },
     denyBookRequest: (obj, args, context) => {
       console.log('deny request resolver', obj, args, context.user);
       if (context.user) {
@@ -116,8 +116,8 @@ const resolvers = {
           if (book.ownedBy.toString() === context.user._id.toString()) {
             book.requestedBy = undefined;
             return book.save();
-          }
-        })
+          } }, { new: true }
+        )
       }
     }
   },

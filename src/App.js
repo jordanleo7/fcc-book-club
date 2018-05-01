@@ -6,6 +6,7 @@ import './App.css';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
+import { WebSocketLink } from 'apollo-link-ws';
 import Home from "./components/Home";
 import AllBooks from "./components/AllBooks";
 import Nav from "./components/Nav";
@@ -23,7 +24,26 @@ const client = new ApolloClient({
   }),
   cache: new InMemoryCache()
 });
+/*
+const wsLink = new WebSocketLink({
+  uri: `ws://localhost:4000/`,
+  options: {
+    reconnect: true
+  }
+});
 
+// using the ability to split links, you can send data to each link
+// depending on what kind of operation is being sent
+const link = split(
+  // split based on operation type
+  ({ query }) => {
+    const { kind, operation } = getMainDefinition(query);
+    return kind === 'OperationDefinition' && operation === 'subscription';
+  },
+  wsLink,
+  client,
+);
+*/
 class App extends Component {
   render() {
     return (

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { graphql, compose, Mutation } from 'react-apollo';
+import { graphql, compose, Mutation, Subscription } from 'react-apollo';
 import gql from "graphql-tag";
 import { Link } from "react-router-dom";
-import { signedInUser, signedInUsersBooks, acceptBookRequest, denyBookRequest } from '../queries';
+import { signedInUser, signedInUsersBooks, acceptBookRequest, denyBookRequest, subscribeToBookUpdates } from '../queries';
 import AddBook from './AddBook';
+import { connect } from 'mongoose';
 
 class Profile extends Component {
 
@@ -38,7 +39,6 @@ class Profile extends Component {
               <ul>
                 {
                   this.props.signedInUsersBooks.signedInUsersBooks.map((book, index) => {
-                    console.log('mapping',book);
                     if (book.requestedBy) {
                       return (
                         <li key={index}> 
@@ -48,9 +48,12 @@ class Profile extends Component {
                               {(acceptBookRequest) => (
                                 <button 
                                   onClick={() => {
-                                    console.log('accept request', book);
                                     acceptBookRequest({
-                                      variables: { id: book.id, requestedBy: book.requestedBy.id }
+                                      variables: { id: book.id, requestedBy: book.requestedBy.id },
+                                      refetchQueries: [{ 
+                                        query: signedInUsersBooks, 
+                                        variables: {name: "signedInUsersBooks"}
+                                      }],
                                     })
                                   }}
                                 >
@@ -65,7 +68,11 @@ class Profile extends Component {
                                   onClick={() => {
                                     console.log('decline request', book);
                                     denyBookRequest({
-                                      variables: { id: book.id }
+                                      variables: { id: book.id },
+                                      refetchQueries: [{ 
+                                        query: signedInUsersBooks, 
+                                        variables: {name: "signedInUsersBooks"}
+                                      }],
                                     })
                                   }}
                                 >
@@ -135,19 +142,142 @@ export default compose(
   graphql(denyBookRequest)
 )(Profile)
 
+/* this one works
+export default compose(
+  graphql(gql`
+   { signedInUsersBooks {
+    id
+    title
+    author
+    summary
+    cover
+    ownedBy {
+      id
+      username
+      city
+      myState
+    }
+    requestedBy {
+      id
+      username
+      city
+      myState
+    }}
+  }
+  `, {name: "signedInUsersBooks"}),
+  graphql(gql`
+  {
+    signedInUser {
+      id
+      googleId
+      username
+      givenName
+      familyName
+      city
+      myState
+    }
+  }
+`, {name: "signedInUser"}),
+  graphql(acceptBookRequest),
+  graphql(denyBookRequest)
+)(Profile) 
+*/
 
-/* Using the big compose query export because these options didn't work. Use quotation marks in 2nd test?
+
+/* 
+
+, {
+    options: {
+      refetchQueries: [
+        {query: gql`
+          {
+            signedInUser {
+              id
+              googleId
+              username
+              givenName
+              familyName
+              city
+              myState
+            }
+          }
+        `, variables: {name: "signedInUser"}
+        }
+      ],
+    },
+  }
+
+
+, {
+    options: (props) => ({
+      refetchQueries: [
+        {
+          query: gql`
+          { signedInUsersBooks {
+          id
+          title
+          author
+          summary
+          cover
+          ownedBy {
+            id
+            username
+            city
+            myState
+          }
+          requestedBy {
+            id
+            username
+            city
+            myState
+          }
+        }
+        }
+        `, variables {name: "signedInUsersBooks"}
+        }
+      ]
+    })
+  }
+
+
+export default graphql(gql`mutation { ... }`, {
+  options: (props) => ({
+    refetchQueries: [
+      {
+        query: COMMENT_LIST_QUERY,
+      },
+      {
+        query: gql`
+          query ($id: ID!) {
+            post(id: $id) {
+              commentCount
+            }
+          }
+        `,
+        variables: {
+          id: props.postID,
+        },
+      },
+    ],
+  }),
+})(MyComponent);
+
+
+Using the big compose query export because these options didn't work. Use quotation marks in 2nd test?
 
 export default compose(
   graphql(signedInUsersBooks),
-  graphql(signedInUser)
-  graphql(acceptBookRequest)
+  graphql(signedInUser),
+  graphql(acceptBookRequest),
+  graphql(denyBookRequest)
 )(Profile)
 
 export default compose(
   graphql(signedInUsersBooks, {name: signedInUsersBooks}),
-  graphql(signedInUser, {name: signedInUser})
-  graphql(acceptBookRequest)
+  graphql(signedInUser, {name: signedInUser}),
+  graphql(acceptBookRequest),
+  graphql(denyBookRequest)
 )(Profile)
 
 */
+
