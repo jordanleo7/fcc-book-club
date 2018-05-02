@@ -36,12 +36,13 @@
     "npm-run-all": "^4.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server/server.js",
+    "start-react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "server": "nodemon server/server.js",
-    "dev": "run-p server start",
+    "dev": "run-p server start-react",
     "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "proxy": {
