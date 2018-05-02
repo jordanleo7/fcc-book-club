@@ -43,7 +43,7 @@
     "eject": "react-scripts eject",
     "server": "nodemon server/server.js",
     "dev": "run-p server start-react",
-    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "npm run build"
   },
   "proxy": {
     "/auth/*": {
