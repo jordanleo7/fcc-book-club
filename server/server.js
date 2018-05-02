@@ -85,4 +85,12 @@ websocketServer.listen(PORT, () => {
 })
 */
 
+// The build folder with static assets is the only output produced by Create React App.
+app.use(express.static(path.join(__dirname, '../build')));
+
+// Serving Apps with Client-Side Routing. Serve index.html for any unknown paths
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
+})
+
 app.listen(PORT, () => {console.log(`GraphQL Server is now running on ${PORT}`)});

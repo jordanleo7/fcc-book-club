@@ -176,128 +176,8 @@ export default compose(
   graphql(denyBookRequest)
 )(Profile)
 
-/* this one works
-export default compose(
-  graphql(gql`
-   { signedInUsersBooks {
-    id
-    title
-    author
-    summary
-    cover
-    ownedBy {
-      id
-      username
-      city
-      myState
-    }
-    requestedBy {
-      id
-      username
-      city
-      myState
-    }}
-  }
-  `, {name: "signedInUsersBooks"}),
-  graphql(gql`
-  {
-    signedInUser {
-      id
-      googleId
-      username
-      givenName
-      familyName
-      city
-      myState
-    }
-  }
-`, {name: "signedInUser"}),
-  graphql(acceptBookRequest),
-  graphql(denyBookRequest)
-)(Profile) 
-*/
 
-
-/* 
-
-, {
-    options: {
-      refetchQueries: [
-        {query: gql`
-          {
-            signedInUser {
-              id
-              googleId
-              username
-              givenName
-              familyName
-              city
-              myState
-            }
-          }
-        `, variables: {name: "signedInUser"}
-        }
-      ],
-    },
-  }
-
-
-, {
-    options: (props) => ({
-      refetchQueries: [
-        {
-          query: gql`
-          { signedInUsersBooks {
-          id
-          title
-          author
-          summary
-          cover
-          ownedBy {
-            id
-            username
-            city
-            myState
-          }
-          requestedBy {
-            id
-            username
-            city
-            myState
-          }
-        }
-        }
-        `, variables {name: "signedInUsersBooks"}
-        }
-      ]
-    })
-  }
-
-
-export default graphql(gql`mutation { ... }`, {
-  options: (props) => ({
-    refetchQueries: [
-      {
-        query: COMMENT_LIST_QUERY,
-      },
-      {
-        query: gql`
-          query ($id: ID!) {
-            post(id: $id) {
-              commentCount
-            }
-          }
-        `,
-        variables: {
-          id: props.postID,
-        },
-      },
-    ],
-  }),
-})(MyComponent);
-
-
-Using the big compose query export because these options didn't work. Use quotation marks in 2nd test?
+/* I wish these worked, but they only load 1 of the 2 queries:
 
 export default compose(
   graphql(signedInUsersBooks),
@@ -305,6 +185,8 @@ export default compose(
   graphql(acceptBookRequest),
   graphql(denyBookRequest)
 )(Profile)
+
+or 
 
 export default compose(
   graphql(signedInUsersBooks, {name: signedInUsersBooks}),
@@ -314,4 +196,3 @@ export default compose(
 )(Profile)
 
 */
-
