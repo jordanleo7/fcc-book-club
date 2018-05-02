@@ -53,7 +53,7 @@ const AllBooks = () => (
     `}
     >
       {({ loading, error, data }) => {
-        if (loading) return <p>Loading</p>;
+        if (loading) return <div>Loading</div>;
         if (error) return <p>Error</p>;
         return data.books.map((book) => (
           <div key={book.title} style={listItemStyling}>

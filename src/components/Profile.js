@@ -5,38 +5,6 @@ import { Link } from "react-router-dom";
 import { signedInUser, signedInUsersBooks, acceptBookRequest, denyBookRequest } from '../queries';
 import AddBook from './AddBook';
 
-const profileContainer = {
-  padding: '8px',
-  textAlign: 'center'
-}
-
-const listStyle = {
-  listStyleType: 'none',
-  margin: '0',
-  padding: '0'
-}
-
-const editProfileLinkContainer = {
-  padding: '16px 0',
-  borderBottom: '1px solid lightgray',
-  borderRadius: '0'
-}
-
-const linkStyle = {
-  color: '#4396C4',
-  textDecoration: 'none',
-}
-
-const buttonApprove = {
-  backgroundColor: 'none',
-  border: 'none',
-  fontSize: '1em',
-  padding: '0',
-  margin: '0',
-  color: '#4396C4',
-  cursor: 'pointer'
-}
-
 class Profile extends Component {
 
   SignedInUser() {
@@ -46,28 +14,29 @@ class Profile extends Component {
     if (this.props.signedInUsersBooks && this.props.signedInUser) {
 
       return (
-        <div style={profileContainer}>
-          <div>
+        <div className="profile--container">
+          <div className="profile--info">
             <h3>My Profile</h3>
-            <ul style={listStyle}>
+            <ul>
               <li>{this.props.signedInUser.signedInUser.username}</li>
               <li>{this.props.signedInUser.signedInUser.givenName} {this.props.signedInUser.signedInUser.familyName}</li>
               <li>{this.props.signedInUser.signedInUser.city}, {this.props.signedInUser.signedInUser.myState}</li>
             </ul>
+            <Link to={"/editprofile"}>Update</Link>
           </div>
-          <div style={editProfileLinkContainer}>
-            <Link to={"/editprofile"} style={linkStyle}>Edit Profile</Link>
-          </div>
-          <div>
+          <div className="profile--books">
             <h3>My Books</h3>
+            <ul>
               {this.props.signedInUsersBooks.signedInUsersBooks.map((book) => (
-                <div key={book.title}>
-                <p>{`${book.title} by ${book.author}`}</p>
-                </div> 
+                <li key={book.title}>
+                  <Link to={`/book/${book.id}`}>{book.title}</Link> by {book.author}
+                </li> 
               ))}
+            </ul>
+            <h3>New Book</h3>
             <AddBook/>
           </div>
-          <div>
+          <div className="bookrequests--container">
             <h3>Pending Book Requests</h3>
               <ul>
                 {
@@ -79,7 +48,8 @@ class Profile extends Component {
                           <div>            
                             <Mutation mutation={acceptBookRequest}>
                               {(acceptBookRequest) => (
-                                <button 
+                                <button
+                                  className="button--yes"  
                                   onClick={() => {
                                     acceptBookRequest({
                                       variables: { id: book.id, requestedBy: book.requestedBy.id },
@@ -94,10 +64,11 @@ class Profile extends Component {
                                 </button>
                               )}
                             </Mutation>                            
-                            
+                            {" | "}
                             <Mutation mutation={denyBookRequest}>
                               {(denyBookRequest) => (
-                                <button 
+                                <button
+                                  className="button--no" 
                                   onClick={() => {
                                     console.log('decline request', book);
                                     denyBookRequest({

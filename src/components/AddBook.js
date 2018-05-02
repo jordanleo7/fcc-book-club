@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { graphql, Mutation } from 'react-apollo';
-import { signedInUser } from '../queries';
+import { signedInUser, signedInUsersBooks } from '../queries';
 import gql from "graphql-tag";
 
 const ADD_BOOK = gql`
@@ -11,6 +11,7 @@ const ADD_BOOK = gql`
       author
       summary
       cover
+      ownedBy
     }
   }
 `;
@@ -42,10 +43,10 @@ class AddBook extends Component {
     return (
       <Mutation
       mutation={ADD_BOOK}
-      refetchQueries={[{ query: signedInUser }]}
+      refetchQueries={[{ query: signedInUsersBooks }]}
       >
       {addBook => (
-        <div>
+        <div className="addbook--container">
           <form onSubmit={e => {
             e.preventDefault();
             addBook({ variables: { 
@@ -101,7 +102,7 @@ class AddBook extends Component {
 
           </div>
 
-          <button type="submit">Add book to my inventory</button>
+          <button type="submit" className="button--yes">Add</button>
 
           </form>
         </div>

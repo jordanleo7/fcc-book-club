@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
-import './App.css';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
@@ -15,7 +14,7 @@ import Book from "./components/Book";
 
 const client = new ApolloClient({
   link: new HttpLink({ 
-    uri: process.env.HTTPLINK, 
+    uri: process.env.HTTPLINK || 'http://localhost:4000/graphql', 
     credentials: 'include'
   }),
   cache: new InMemoryCache()

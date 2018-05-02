@@ -85,7 +85,8 @@ class EditProfile extends Component {
       refetchQueries={[{ query: signedInUser }]}
       >
       {editUser => (
-        <div>
+        <div className="editprofile--container">
+          <h3>Edit Profile</h3>
           <form onSubmit={e => {
             e.preventDefault();
             editUser({ variables: { 
@@ -158,7 +159,7 @@ class EditProfile extends Component {
           </label>
           </div>
 
-          <button type="submit">Save</button>
+          <button type="submit" className="button--yes">Save</button>
 
           </form>
         </div>
