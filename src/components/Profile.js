@@ -4,7 +4,6 @@ import gql from "graphql-tag";
 import { Link } from "react-router-dom";
 import { signedInUser, signedInUsersBooks, acceptBookRequest, denyBookRequest, subscribeToBookUpdates } from '../queries';
 import AddBook from './AddBook';
-import { connect } from 'mongoose';
 
 const profileContainer = {
   padding: '8px',
