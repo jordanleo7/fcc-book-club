@@ -16,7 +16,7 @@ const resolvers = require('./resolvers');
 const { makeExecutableSchema } = require('graphql-tools');
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 const User = require('./User');
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 const app = express();
 
 var corsOptions = {
