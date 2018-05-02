@@ -5,7 +5,7 @@ const passport = require('passport');
 
 authRouter.get('/auth/logout', (req,res) => {
   req.logout();
-  res.redirect('http://localhost:3000/');
+  res.redirect('/');
 })
 
 authRouter.get('/auth/google', passport.authenticate('google', {
@@ -13,7 +13,7 @@ authRouter.get('/auth/google', passport.authenticate('google', {
 }));
 
 authRouter.get('/auth/google/redirect', passport.authenticate('google'), (req, res) => {
-  res.redirect('http://localhost:3000/');
+  res.redirect('/');
 });
 
 const authCheck = (req, res, next) => {
@@ -22,7 +22,7 @@ const authCheck = (req, res, next) => {
     next(req.user);
   } else {
     // If user is not logged in
-    res.redirect('http://localhost:4000/auth/google');
+    res.redirect('/auth/google');
   }
 };
 
