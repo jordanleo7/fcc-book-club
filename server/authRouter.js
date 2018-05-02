@@ -1,4 +1,3 @@
-// User authentication
 const express = require('express');
 const authRouter = express.Router();
 const passport = require('passport');
@@ -35,7 +34,5 @@ authRouter.get('/auth/isSignedIn', function (req, res) {
     res.send(null);
   }
 })
-//
-//////////////////////
 
 module.exports = authRouter;
