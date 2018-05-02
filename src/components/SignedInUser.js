@@ -25,11 +25,11 @@ class SignedInUser extends Component {
         <div>
           <span>Hi, {this.props.data.signedInUser.username}!</span>{" "}
           <Link to={"/profile"} style={linkStyle}>MyProfile</Link>{" "}
-          <a href={"http://localhost:4000/auth/logout"} style={linkStyle}>Sign out</a>
+          <a href={"/auth/logout"} style={linkStyle}>Sign out</a>
         </div>
       );
     }
-    return (<div><a href={"http://localhost:4000/auth/google"}>Sign in</a></div>);
+    return (<div><a href={"/auth/google"} style={linkStyle}>Sign in</a></div>);
   }
 
   render() {
