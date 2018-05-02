@@ -7,11 +7,10 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const { graphqlExpress, graphiqlExpress} = require('apollo-server-express');
-const { PubSub } = require('graphql-subscriptions');
+//const { PubSub } = require('graphql-subscriptions');
 const { createServer } = require('http');
-const { SubscriptionServer } = require('subscriptions-transport-ws');
+//const { SubscriptionServer } = require('subscriptions-transport-ws');
 const { graphql, execute, subscribe } = require('graphql');
-const jwt = require('jsonwebtoken');
 // Create GraphQL Schema
 const typeDefs = require('./typeDefs');
 const resolvers = require('./resolvers');
@@ -21,23 +20,9 @@ const User = require('./User');
 const PORT = 4000;
 const app = express();
 
-//const SECRET = process.env.SESSION_COOKIE_KEY;
-/*const addUser = async (req) => {
-  const token = req.headers.authorization;
-  /*try {
-    const { user } = await jwt.verify(token, SECRET);
-    req.user = user;
-  } catch (err) {
-    console.log(err);
-  }
-  req.next();
-};
-*/
-
-//app.use(addUser);
 var corsOptions = {
-  origin: 'http://localhost:3000',
-  credentials: true // <-- REQUIRED backend setting
+  origin: ['http://localhost:3000', 'https://book-traders.herokuapp.com'],
+  credentials: true
 };
 app.use(cors(corsOptions));
 //app.use(cors()); //'*', cors({ origin: 'http://localhost:3000', credentials: true }));
@@ -75,7 +60,7 @@ app.use(
     } 
   }))
 );
-
+/*
 app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
   subscriptionsEndpoint: `ws://localhost:${PORT}/subscriptions`
@@ -99,3 +84,6 @@ websocketServer.listen(PORT, () => {
     path: '/subscriptions',
   });
 })
+*/
+
+app.listen(PORT, () => {console.log(`GraphQL Server is now running on ${PORT}`)});
