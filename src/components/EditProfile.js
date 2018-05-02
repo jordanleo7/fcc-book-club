@@ -67,7 +67,7 @@ class EditProfile extends Component {
   }
 
   render() {
-    console.log(this.props);
+
     if (this.state.redirectToNewPage) {
       return <Redirect to="/profile" />;
     }
@@ -157,6 +157,7 @@ class EditProfile extends Component {
               maxLength="200"
             />
           </label>
+          
           </div>
 
           <button type="submit" className="button--yes">Save</button>

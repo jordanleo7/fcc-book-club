@@ -32,8 +32,8 @@ type Query {
 type Mutation {
   addUser(username: String!, givenName: String!, familyName: String!, city: String, myState: String): User
   editUser(username: String!, givenName: String!, familyName: String!, city: String, myState: String): User
-  addBook(title: String!, author: String!, summary: String!, cover: String): Book
-  editBook(title: String!, author: String!, summary: String!, cover: String): Book
+  addBook(title: String!, author: String!, summary: String!, cover: String, ownedBy: String): Book
+  editBook(title: String!, author: String!, summary: String!, cover: String, ownedBy: String): Book
   requestBook(id: String!): Book
   acceptBookRequest(id: String!, requestedBy: String!): Book
   denyBookRequest(id: String!): Book

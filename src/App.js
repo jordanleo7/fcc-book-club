@@ -11,6 +11,7 @@ import Nav from "./components/Nav";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import Book from "./components/Book";
+import AddBook from "./components/AddBook";
 
 const client = new ApolloClient({
   link: new HttpLink({ 
@@ -53,6 +54,7 @@ class App extends Component {
             <Route path="/book/:id" component={Book}/>
             <Route path="/profile" component={Profile}/>
             <Route path="/editprofile" component={EditProfile}/>
+            <Route path="/addbook" component={AddBook}/>
           </div>
         </BrowserRouter>
       </ApolloProvider>

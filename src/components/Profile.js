@@ -3,7 +3,6 @@ import { graphql, compose, Mutation } from 'react-apollo';
 import gql from "graphql-tag";
 import { Link } from "react-router-dom";
 import { signedInUser, signedInUsersBooks, acceptBookRequest, denyBookRequest } from '../queries';
-import AddBook from './AddBook';
 
 class Profile extends Component {
 
@@ -33,8 +32,7 @@ class Profile extends Component {
                 </li> 
               ))}
             </ul>
-            <h3>New Book</h3>
-            <AddBook/>
+            <Link to={"/addbook"}>Add Book</Link>
           </div>
           <div className="bookrequests--container">
             <h3>Pending Book Requests</h3>

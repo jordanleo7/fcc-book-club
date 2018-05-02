@@ -70,6 +70,7 @@ const resolvers = {
       }
     },
     addBook: (obj, args, context) => {
+      console.log('yeah!',obj,args,context)
       if (context.user) {
         const newBook = new Book({ 
           title: args.title, 

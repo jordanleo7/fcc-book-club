@@ -18,7 +18,7 @@ class SignedInUser extends Component {
       );
     }
     return (
-      <div>
+      <div className="nav--right">
         <a href={"/auth/google"}>
           Sign in
         </a>

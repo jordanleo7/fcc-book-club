@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import { graphql, Mutation } from 'react-apollo';
 import { signedInUser, signedInUsersBooks } from '../queries';
 import gql from "graphql-tag";
@@ -23,7 +24,7 @@ class AddBook extends Component {
       title: "",
       author: "",
       summary: "",
-      cover: ""
+      redirectToNewPage: false
     };
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -40,6 +41,10 @@ class AddBook extends Component {
 
   render() {
 
+    if (this.state.redirectToNewPage) {
+      return <Redirect to="/profile" />;
+    }
+
     return (
       <Mutation
       mutation={ADD_BOOK}
@@ -47,20 +52,15 @@ class AddBook extends Component {
       >
       {addBook => (
         <div className="addbook--container">
+          <h3>New Book</h3>
           <form onSubmit={e => {
             e.preventDefault();
             addBook({ variables: { 
               title: this.state.title,
               author: this.state.author,
-              summary: this.state.summary,
-              cover: this.state.cover
+              summary: this.state.summary
             }})
-            this.setState({ 
-              title: "",
-              author: "",
-              summary: "",
-              cover: ""
-            })
+            this.setState({ redirectToNewPage: true })
           }}>
 
           <div>
@@ -113,3 +113,11 @@ class AddBook extends Component {
 }
 
 export default graphql(signedInUser)(AddBook)
+
+/*
+            this.setState({ 
+              title: "",
+              author: "",
+              summary: "",
+              cover: ""
+            })*/
