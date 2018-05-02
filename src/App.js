@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { ApolloProvider, Query } from 'react-apollo';
-import logo from './logo.svg';
+import { BrowserRouter, Route } from 'react-router-dom';
+import { ApolloProvider } from 'react-apollo';
 import './App.css';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
-import { WebSocketLink } from 'apollo-link-ws';
+//import { WebSocketLink } from 'apollo-link-ws';
 import Home from "./components/Home";
 import AllBooks from "./components/AllBooks";
 import Nav from "./components/Nav";
@@ -16,11 +15,8 @@ import Book from "./components/Book";
 
 const client = new ApolloClient({
   link: new HttpLink({ 
-    uri: 'http://localhost:4000/graphql', 
-    credentials: 'include',
-    clientState: {
-
-    }
+    uri: process.env.HTTPLINK, 
+    credentials: 'include'
   }),
   cache: new InMemoryCache()
 });

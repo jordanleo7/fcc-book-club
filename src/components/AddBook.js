@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
 import { graphql, Mutation } from 'react-apollo';
 import { signedInUser } from '../queries';
 import gql from "graphql-tag";

@@ -1,8 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import AllBooks from './AllBooks';
-import AllUsers from './AllUsers';
-import SignedInUser from "./SignedInUser";
 
 const bookStyling = {
   padding: '0 8px',

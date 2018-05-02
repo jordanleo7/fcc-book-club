@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Query, Mutation, graphql } from 'react-apollo';
 import gql from "graphql-tag";
-import { Link } from "react-router-dom";
 import { requestBook } from "../queries";
 
 const bookContainer = {

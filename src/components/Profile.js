@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { graphql, compose, Mutation, Subscription } from 'react-apollo';
+import { graphql, compose, Mutation } from 'react-apollo';
 import gql from "graphql-tag";
 import { Link } from "react-router-dom";
-import { signedInUser, signedInUsersBooks, acceptBookRequest, denyBookRequest, subscribeToBookUpdates } from '../queries';
+import { signedInUser, signedInUsersBooks, acceptBookRequest, denyBookRequest } from '../queries';
 import AddBook from './AddBook';
 
 const profileContainer = {
@@ -115,7 +115,7 @@ class Profile extends Component {
                             </Mutation></div>
                         </li>
                       )
-                    }
+                    } else { return null }
                   })
                 }
               </ul>
