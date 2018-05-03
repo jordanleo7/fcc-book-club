@@ -4,19 +4,6 @@ import { graphql, compose, Mutation } from 'react-apollo';
 import { signedInUser, signedInUsersBooks, addBook } from '../queries';
 import gql from "graphql-tag";
 
-const ADD_BOOK = gql`
-  mutation addBook($title: String!, $author: String!, $summary: String!, $cover: String) {
-    addBook(title: $title, author: $author, summary: $summary, cover: $cover) {
-      id
-      title
-      author
-      summary
-      cover
-      ownedBy
-    }
-  }
-`;
-
 class AddBook extends Component {
   constructor(props) {
     super(props);
@@ -116,11 +103,3 @@ export default compose(
   graphql(signedInUser),
   graphql(addBook)
 )(AddBook)
-
-/*
-            this.setState({ 
-              title: "",
-              author: "",
-              summary: "",
-              cover: ""
-            })*/
