@@ -17,7 +17,7 @@ const graphQLLink = process.env.HTTPLINK || 'http://localhost:4000/graphql';
 
 const client = new ApolloClient({
   link: new HttpLink({ 
-    uri: graphQLLink, 
+    uri: process.env.HTTPLINK, 
     credentials: 'include'
   }),
   cache: new InMemoryCache()
