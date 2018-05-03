@@ -13,9 +13,11 @@ import EditProfile from "./components/EditProfile";
 import Book from "./components/Book";
 import AddBook from "./components/AddBook";
 
+const graphQLLink = process.env.HTTPLINK || 'http://localhost:4000/graphql';
+
 const client = new ApolloClient({
   link: new HttpLink({ 
-    uri: process.env.HTTPLINK || 'http://localhost:4000/graphql', 
+    uri: graphQLLink, 
     credentials: 'include'
   }),
   cache: new InMemoryCache()
