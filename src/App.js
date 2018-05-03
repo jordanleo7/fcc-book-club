@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 //import { WebSocketLink } from 'apollo-link-ws';
 import Home from "./components/Home";
 import AllBooks from "./components/AllBooks";
@@ -13,12 +13,10 @@ import EditProfile from "./components/EditProfile";
 import Book from "./components/Book";
 import AddBook from "./components/AddBook";
 
-const graphQLLink = process.env.HTTPLINK || 'http://localhost:4000/graphql';
-
 const client = new ApolloClient({
   link: new HttpLink({ 
-    uri: graphQLLink, 
-    credentials: 'include'
+    uri: "/graphql", 
+    credentials: 'same-origin'
   }),
   cache: new InMemoryCache()
 });
