@@ -47,7 +47,7 @@ class App extends Component {
     return (
       <ApolloProvider client={client}>
         <BrowserRouter>
-          <div>
+          <div className="site--container">
             <Nav/>
             <Route exact path="/" component={Home}/>
             <Route path="/allbooks" component={AllBooks}/>

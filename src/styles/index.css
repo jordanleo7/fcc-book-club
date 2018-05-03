@@ -22,10 +22,6 @@ a {
   float: right;
 }
 
-@media (min-width: 576px) {
-
-}
-
 /* 
 Buttons
 */
@@ -53,6 +49,15 @@ Buttons
 .button--padding {
   padding: 8px 0;
   display: inline-block;
+}
+
+/*
+Site container
+*/
+
+.site--container {
+  margin: 0 auto;
+  max-width: 1080px;
 }
 
 /*
@@ -128,9 +133,114 @@ AddBook, EditProfile
 .form--container input {
   display: block;
   border: none;
-  border-radius: none;
+  border-radius: 0;
   border-bottom: 1px solid lightgray;
   font-size: 1em;
   padding: 4px 0;
   width: 100%;
+}
+
+/*
+all books 
+*/
+
+.home--container h3 {
+  text-align: center;
+  font-weight: bold;
+  padding: 8px 0;
+}
+
+.allbooks--container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.allbooks--container h3 {
+  text-align: center;
+  font-weight: bold;
+  padding: 8px 0;
+}
+
+.book--container {
+  margin: 0 auto;
+  padding: 16px 0 0 0;
+  width: 33.33%;
+  text-align: center;
+  display: flex;
+  flex: 0 1 auto;
+  border-radius: 0;
+  justify-content: center;
+}
+
+.book--container span {
+  display: block;
+  padding: 16px 8px 0px 8px;
+}
+
+.book--placeholder-book-cover {
+  height: 150px;
+  width: 100px;
+  background: navy;
+  margin: 0 auto;
+  color: white;
+  text-align: center;
+}
+
+@media (min-width: 576px) {
+  .book--container {
+    width: 25%;
+  }
+}
+
+@media (min-width: 768px) {
+  .book--container {
+    width: 20%;
+  }
+}
+
+@media (min-width: 992px) {
+  .book--container {
+    width: 16.66%;
+  }
+}
+
+/* 
+single book view 
+*/
+
+.bookview--padding-container {
+  padding: 16px;
+}
+
+.bookview--padding-container h3 {
+  font-weight: bold;
+  text-align: center;
+}
+
+.bookview--container {
+  margin: 0 auto;
+  padding: 16px 0 0 0;
+  width: 100%;
+  text-align: center;
+  border-radius: 0;
+}
+
+.bookview--container span {
+  display: block;
+  padding: 16px 8px 0px 8px;
+}
+
+.bookview--container li {
+  padding: 8px 0;
+  border-bottom: 1px solid lightgray;
+}
+
+.bookview--container li:nth-child(1) {
+  padding: 16px 0 8px 0;
+}
+
+.bookview--container h6 {
+  padding-bottom: 8px;
+  font-weight: bold;
 }

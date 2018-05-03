@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 class SignedInUser extends Component {
 
   SignedInUser() {
-    if (this.props.loading) return <div>Loading</div>;
-    if (this.props.error) return <p>Error</p>;
+    if (this.props.loading) return <p className="loading">Loading</p>;
+    if (this.props.error) return <p className="error">Error</p>;
     if (this.props.data.signedInUser) {
       return (
         <div className="nav--right">
