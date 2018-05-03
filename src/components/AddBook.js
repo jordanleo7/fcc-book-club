@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { graphql, Mutation } from 'react-apollo';
-import { signedInUser, signedInUsersBooks } from '../queries';
+import { graphql, compose, Mutation } from 'react-apollo';
+import { signedInUser, signedInUsersBooks, addBook } from '../queries';
 import gql from "graphql-tag";
 
 const ADD_BOOK = gql`
@@ -47,7 +47,7 @@ class AddBook extends Component {
 
     return (
       <Mutation
-      mutation={ADD_BOOK}
+      mutation={addBook}
       refetchQueries={[{ query: signedInUsersBooks }]}
       >
       {addBook => (
@@ -112,7 +112,10 @@ class AddBook extends Component {
   };
 }
 
-export default graphql(signedInUser)(AddBook)
+export default compose(
+  graphql(signedInUser),
+  graphql(addBook)
+)(AddBook)
 
 /*
             this.setState({ 

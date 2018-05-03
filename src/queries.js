@@ -62,6 +62,31 @@ const signedInUsersBooks = gql`
   }
 `
 
+
+const addBook = gql`
+  mutation addBook($title: String!, $author: String!, $summary: String!, $cover: String) {
+    addBook(title: $title, author: $author, summary: $summary, cover: $cover) {
+      id
+      title
+      author
+      summary
+      cover
+      ownedBy {
+        id
+        username
+        city
+        myState
+      }
+      requestedBy {
+        id
+        username
+        city
+        myState
+      }
+    }
+  }
+`;
+
 const requestBook = gql`
   mutation requestBook ($id: String!) {
     requestBook(id: $id) {
@@ -158,4 +183,4 @@ const subscribeToBookUpdates = gql`
   }
 `
 
-export { signedInUser, allBooks, requestBook, acceptBookRequest, signedInUsersBooks, denyBookRequest, subscribeToBookUpdates }
+export { signedInUser, allBooks, requestBook, acceptBookRequest, signedInUsersBooks, addBook, denyBookRequest, subscribeToBookUpdates }

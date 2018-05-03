@@ -5,13 +5,13 @@ import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 //import { WebSocketLink } from 'apollo-link-ws';
+import Nav from "./components/Nav";
 import Home from "./components/Home";
 import AllBooks from "./components/AllBooks";
-import Nav from "./components/Nav";
-import Profile from "./components/Profile";
-import EditProfile from "./components/EditProfile";
 import Book from "./components/Book";
 import AddBook from "./components/AddBook";
+import Profile from "./components/Profile";
+import EditProfile from "./components/EditProfile";
 
 const client = new ApolloClient({
   link: new HttpLink({ 
