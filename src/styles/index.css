@@ -1,3 +1,7 @@
+/*
+All Components
+*/
+
 body {
   font-family: Helvetica, Arial, sans-serif;
 }
@@ -5,6 +9,55 @@ body {
 a {
   text-decoration: none;
 }
+
+.loading {
+  text-align: center;
+}
+
+.error {
+  text-align: center;
+}
+
+.float-right {
+  float: right;
+}
+
+@media (min-width: 576px) {
+
+}
+
+/* 
+Buttons
+*/
+
+.button--yes {
+  border: none;
+  color: green;
+  background: none;
+  font-size: 1em;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.button--no {
+  border: none;
+  color: red;
+  background: none;
+  font-size: 1em;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.button--padding {
+  padding: 8px 0;
+  display: inline-block;
+}
+
+/*
+Nav
+*/
 
 .nav {
   padding: 16px;
@@ -29,12 +82,12 @@ a {
   margin-left: 16px;
 }
 
+/*
+Profile
+*/
+
 .profile--container {
   padding: 16px;
-}
-
-@media (min-width: 576px) {
-
 }
 
 .profile--container h3 {
@@ -43,88 +96,41 @@ a {
   padding: 8px 0;
 }
 
-.profile--container a {
+.profile--container li a {
   color: blue;
 }
 
-.profile--info {
-  
-}
-
-.profile--info li {
-  padding: 0 0 8px 0;
-}
-
-.profile--books {
-
-}
-
-.profile--books li {
+.profile--container li {
   padding: 8px 0;
   border-bottom: 1px solid lightgray;
 }
 
-.editprofile--container {
+/*
+AddBook, EditProfile
+*/
+
+.form--container {
   padding: 16px;
 }
 
-.editprofile--container h3 {
+.form--container h3 {
   font-weight: bold;
   text-align: center;
+  padding: 8px 0;
 }
 
-.editprofile--container label {
+.form--container label {
   display: block;
   padding: 8px 0;
-  color: gray;
+  color: black;
 }
 
-.editprofile--container input {
+.form--container input {
   display: block;
   border: none;
   border-radius: none;
-  border-bottom: 1px solid gray;
-  font-size: 1em;
-  padding: 4px 0;
-  width: 100%;
-}
-
-.addbook--container label {
-  color: gray;
-  display: block;
-  padding: 4px 0;
-}
-
-.addbook--container input {
-  display: block;
-  border: none;
-  border-radius: none;
-  border-bottom: 1px solid gray;
-  font-size: 1em;
-  margin: 4px 0;
-  width: 100%;
-}
-
-.bookrequests--container li {
-  padding: 8px 0;
   border-bottom: 1px solid lightgray;
-}
-
-.button--yes {
-  border: none;
-  color: green;
-  background: none;
   font-size: 1em;
-  cursor: pointer;
-  padding: 0;
+  padding: 4px 0;
+  width: 100%;
 }
-
-.button--no {
-  border: none;
-  color: red;
-  background: none;
-  font-size: 1em;
-  cursor: pointer;
-  padding: 0;
-}
-

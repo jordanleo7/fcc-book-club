@@ -8,22 +8,22 @@ class Profile extends Component {
 
   SignedInUser() {
     console.log(this.props,'signedInUsersBooks:',this.props.signedInUsersBooks.signedInUsersBooks, 'signedInUser:',this.props.signedInUser.signedInUser);
-    if (this.props.signedInUsersBooks.loading || this.props.signedInUser.loading) return <p>Loading</p>;
-    if (this.props.signedInUsersBooks.error || this.props.signedInUser.error) return <p>Error</p>;
+    if (this.props.signedInUsersBooks.loading || this.props.signedInUser.loading) return <p className="loading">Loading</p>;
+    if (this.props.signedInUsersBooks.error || this.props.signedInUser.error) return <p className="error">Error</p>;
     if (this.props.signedInUsersBooks && this.props.signedInUser) {
 
       return (
         <div className="profile--container">
-          <div className="profile--info">
+          <div>
             <h3>My Profile</h3>
             <ul>
               <li>{this.props.signedInUser.signedInUser.username}</li>
               <li>{this.props.signedInUser.signedInUser.givenName} {this.props.signedInUser.signedInUser.familyName}</li>
               <li>{this.props.signedInUser.signedInUser.city}, {this.props.signedInUser.signedInUser.myState}</li>
             </ul>
-            <Link to={"/editprofile"}>Update</Link>
+            <Link to={"/editprofile"} className="button--yes button--padding">Update</Link>
           </div>
-          <div className="profile--books">
+          <div>
             <h3>My Books</h3>
             <ul>
               {this.props.signedInUsersBooks.signedInUsersBooks.map((book) => (
@@ -32,9 +32,9 @@ class Profile extends Component {
                 </li> 
               ))}
             </ul>
-            <Link to={"/addbook"}>Add Book</Link>
+            <Link to={"/addbook"} className="button--yes button--padding">Add Book</Link>
           </div>
-          <div className="bookrequests--container">
+          <div>
             <h3>Pending Book Requests</h3>
               <ul>
                 {
@@ -47,7 +47,7 @@ class Profile extends Component {
                             <Mutation mutation={acceptBookRequest}>
                               {(acceptBookRequest) => (
                                 <button
-                                  className="button--yes"  
+                                  className="button--yes button--padding"  
                                   onClick={() => {
                                     acceptBookRequest({
                                       variables: { id: book.id, requestedBy: book.requestedBy.id },
@@ -61,12 +61,12 @@ class Profile extends Component {
                                   Accept
                                 </button>
                               )}
-                            </Mutation>                            
-                            {" | "}
+                            </Mutation>
+
                             <Mutation mutation={denyBookRequest}>
                               {(denyBookRequest) => (
                                 <button
-                                  className="button--no" 
+                                  className="button--no button--padding float-right" 
                                   onClick={() => {
                                     console.log('decline request', book);
                                     denyBookRequest({

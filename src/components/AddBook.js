@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { graphql, compose, Mutation } from 'react-apollo';
 import { signedInUser, signedInUsersBooks, addBook } from '../queries';
 import gql from "graphql-tag";
@@ -38,7 +38,7 @@ class AddBook extends Component {
       refetchQueries={[{ query: signedInUsersBooks }]}
       >
       {addBook => (
-        <div className="addbook--container">
+        <div className="form--container">
           <h3>New Book</h3>
           <form onSubmit={e => {
             e.preventDefault();
@@ -89,7 +89,8 @@ class AddBook extends Component {
 
           </div>
 
-          <button type="submit" className="button--yes">Add</button>
+          <button type="submit" className="button--yes button--padding">Add</button>
+          <span><Link to={"/profile"} className="button--no button--padding float-right">Cancel</Link></span>
 
           </form>
         </div>

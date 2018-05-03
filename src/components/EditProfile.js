@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { graphql, Mutation } from 'react-apollo';
 import { signedInUser } from '../queries';
 import gql from "graphql-tag";
@@ -85,8 +85,8 @@ class EditProfile extends Component {
       refetchQueries={[{ query: signedInUser }]}
       >
       {editUser => (
-        <div className="editprofile--container">
-          <h3>Edit Profile</h3>
+        <div className="form--container">
+          <h3>Update Profile</h3>
           <form onSubmit={e => {
             e.preventDefault();
             editUser({ variables: { 
@@ -160,9 +160,12 @@ class EditProfile extends Component {
           
           </div>
 
-          <button type="submit" className="button--yes">Save</button>
+          <button type="submit" className="button--yes button--padding">Update</button>
+          
+          <span><Link to={"/profile"} className="button--no button--padding float-right">Cancel</Link></span>
 
           </form>
+
         </div>
       )}
       </Mutation>
