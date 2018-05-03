@@ -7,7 +7,6 @@ import { signedInUser, signedInUsersBooks, acceptBookRequest, denyBookRequest } 
 class Profile extends Component {
 
   SignedInUser() {
-    console.log(this.props,'signedInUsersBooks:',this.props.signedInUsersBooks.signedInUsersBooks, 'signedInUser:',this.props.signedInUser.signedInUser);
     if (this.props.signedInUsersBooks.loading || this.props.signedInUser.loading) return <p className="loading">Loading</p>;
     if (this.props.signedInUsersBooks.error || this.props.signedInUser.error) return <p className="error">Error</p>;
     if (this.props.signedInUsersBooks && this.props.signedInUser) {
@@ -22,6 +21,7 @@ class Profile extends Component {
               <li>{this.props.signedInUser.signedInUser.city}, {this.props.signedInUser.signedInUser.myState}</li>
             </ul>
             <Link to={"/editprofile"} className="button--yes button--padding">Update</Link>
+            <a href={"/auth/logout"} className="button--no button--padding float-right">Sign out</a>
           </div>
           <div>
             <h3>My Books</h3>

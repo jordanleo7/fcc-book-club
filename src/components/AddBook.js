@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { graphql, compose, Mutation } from 'react-apollo';
 import { signedInUser, signedInUsersBooks, addBook } from '../queries';
-import gql from "graphql-tag";
 
 class AddBook extends Component {
   constructor(props) {

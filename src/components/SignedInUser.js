@@ -1,22 +1,36 @@
 import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import { signedInUser } from '../queries';
 import { Link } from "react-router-dom";
+import gql from "graphql-tag";
 
 class SignedInUser extends Component {
 
   SignedInUser() {
-    if (this.props.loading) return <p className="loading">Loading</p>;
-    if (this.props.error) return <p className="error">Error</p>;
-    if (this.props.data.signedInUser) {
+    if (this.props.signedInUsersBooks.loading || this.props.signedInUser.loading) return <p className="loading">Loading</p>;
+    if (this.props.signedInUsersBooks.error || this.props.signedInUser.error) return <p className="error">Error</p>;
+    if (this.props.signedInUsersBooks && this.props.signedInUser) {
+    console.log(this.props,'signedInUsersBooks:',this.props.signedInUsersBooks.signedInUsersBooks, 'signedInUser:',this.props.signedInUser.signedInUser);
+
+      let pendingRequestsBadge = this.props.signedInUsersBooks.signedInUsersBooks.filter(
+        (x, i) => (x.requestedBy)
+      )
+      console.log(pendingRequestsBadge.length);
+
       return (
         <div className="nav--right">
-          <span>Hi, {this.props.data.signedInUser.username}!</span>
-          <span><Link to={"/profile"}>Profile</Link></span>
-          <span><a href={"/auth/logout"}>Sign out</a></span>
+          <span className="nav--requests">
+            Requests: 
+            { pendingRequestsBadge.length ? <span className="pendingRequestsBadge">{pendingRequestsBadge.length}</span> : 0 }
+          </span>
+          <span><Link to={"/profile"}>{this.props.signedInUser.signedInUser.username}'s Profile
+
+          </Link></span>
+          {/*<span><a href={"/auth/logout"}>Sign out</a></span>*/}
         </div>
       );
     }
+
     return (
       <div className="nav--right">
         <a href={"/auth/google"}>
@@ -36,4 +50,40 @@ class SignedInUser extends Component {
 
 }
 
-export default graphql(signedInUser)(SignedInUser)
+//export default graphql(signedInUser)(SignedInUser)
+export default compose(
+  graphql(gql`
+   { signedInUsersBooks {
+    id
+    title
+    author
+    summary
+    cover
+    ownedBy {
+      id
+      username
+      city
+      myState
+    }
+    requestedBy {
+      id
+      username
+      city
+      myState
+    }}
+  }
+  `, {name: "signedInUsersBooks"}),
+  graphql(gql`
+  {
+    signedInUser {
+      id
+      googleId
+      username
+      givenName
+      familyName
+      city
+      myState
+    }
+  }
+`, {name: "signedInUser"})
+)(SignedInUser)
