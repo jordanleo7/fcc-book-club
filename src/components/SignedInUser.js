@@ -10,12 +10,10 @@ class SignedInUser extends Component {
     if (this.props.signedInUsersBooks.loading || this.props.signedInUser.loading) return null;
     if (this.props.signedInUsersBooks.error || this.props.signedInUser.error) return <p className="error">Error</p>;
     if (this.props.signedInUsersBooks.signedInUsersBooks && this.props.signedInUser.signedInUser) {
-    console.log(this.props,'signedInUsersBooks:',this.props.signedInUsersBooks.signedInUsersBooks, 'signedInUser:',this.props.signedInUser.signedInUser);
 
       let pendingRequestsBadge = this.props.signedInUsersBooks.signedInUsersBooks.filter(
-        (x, i) => {console.log(x.requestedBy); (x.requestedBy)}
+        (x, i) => (x.requestedBy)
       )
-      console.log(pendingRequestsBadge.length);
 
       return (
         <div className="nav--right">

@@ -30,7 +30,7 @@ const AllBooks = () => (
         return data.books.map((book) => (
           <div key={book.title} className="book--container">
             <Link to={`/book/${book.id}`}><div className="book--placeholder-book-cover">
-              <span>{book.title}</span>
+              <span className="book--placeholder-book-cover-title">{book.title}</span>
             </div></Link>
             {/*<div>
               <span><Link to={`/book/${book.id}`}>{book.title}</Link></span>

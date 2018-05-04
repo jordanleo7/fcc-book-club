@@ -51,6 +51,10 @@ Buttons
   display: inline-block;
 }
 
+.helper--inline {
+  display: inline-block;
+}
+
 /*
 Site container
 */
@@ -262,4 +266,8 @@ single book view
 .bookview--container h6 {
   padding-bottom: 8px;
   font-weight: bold;
+}
+
+.book--notice {
+  padding: 8px 0 0 0;
 }
