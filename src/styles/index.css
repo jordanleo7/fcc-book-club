@@ -275,3 +275,32 @@ single book view
 .book--notice {
   padding: 8px 0 0 0;
 }
+
+/*
+about
+*/
+
+.about--container {
+  
+}
+
+.about--container h3 {
+  text-align: center;
+  font-weight: bold;
+  padding: 8px 0;
+}
+
+/*
+footer 
+*/
+
+.footer--container {
+  position: fixed;
+  bottom: 0px;
+  padding: 8px 16px;
+  color: black;
+}
+
+.footer--container a {
+  color: black;
+}

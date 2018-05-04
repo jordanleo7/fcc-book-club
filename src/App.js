@@ -5,7 +5,9 @@ import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 //import { WebSocketLink } from 'apollo-link-ws';
+
 import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 import Home from "./components/Home";
 import AllBooks from "./components/AllBooks";
 import Book from "./components/Book";
@@ -13,6 +15,7 @@ import AddBook from "./components/AddBook";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import PendingRequests from "./components/PendingRequests";
+import About from "./components/About";
 
 const client = new ApolloClient({
   link: new HttpLink({ 
@@ -57,6 +60,8 @@ class App extends Component {
             <Route path="/editprofile" component={EditProfile}/>
             <Route path="/addbook" component={AddBook}/>
             <Route path="/pendingrequests" component={PendingRequests}/>
+            <Route exact path="/about" component={About}/>
+            <Footer/>
           </div>
         </BrowserRouter>
       </ApolloProvider>

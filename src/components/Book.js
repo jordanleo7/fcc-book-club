@@ -44,7 +44,8 @@ class Book extends Component {
                       >
                         Request
                       </button>
-                      <div className="helper--inline">{" "}this book from {this.props.book.book.ownedBy.username}</div>
+                      {" "}
+                      <div className="helper--inline">this book from {this.props.book.book.ownedBy.username}</div>
                     </div>
                   )}
                 </Mutation>
