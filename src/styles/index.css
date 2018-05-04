@@ -167,6 +167,10 @@ AddBook, EditProfile
 all books 
 */
 
+.home--container {
+  padding: 16px 0;
+}
+
 .home--container h3 {
   text-align: center;
   font-weight: bold;

@@ -18,8 +18,10 @@ class SignedInUser extends Component {
       return (
         <div className="nav--right">
           <span className="nav--requests">
-            Requests: 
-            { pendingRequestsBadge.length ? <span className="pendingRequestsBadge">{pendingRequestsBadge.length}</span> : <span>0</span> }
+            <Link to={"/pendingrequests"}>
+              Requests: 
+              { pendingRequestsBadge.length ? <span className="pendingRequestsBadge">{pendingRequestsBadge.length}</span> : <span>0</span> }
+            </Link>
           </span>
           <span><Link to={"/profile"}>{this.props.signedInUser.signedInUser.username}'s Profile
 

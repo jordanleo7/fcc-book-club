@@ -12,6 +12,7 @@ import Book from "./components/Book";
 import AddBook from "./components/AddBook";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
+import PendingRequests from "./components/PendingRequests";
 
 const client = new ApolloClient({
   link: new HttpLink({ 
@@ -55,6 +56,7 @@ class App extends Component {
             <Route path="/profile" component={Profile}/>
             <Route path="/editprofile" component={EditProfile}/>
             <Route path="/addbook" component={AddBook}/>
+            <Route path="/pendingrequests" component={PendingRequests}/>
           </div>
         </BrowserRouter>
       </ApolloProvider>
