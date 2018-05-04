@@ -28,7 +28,7 @@ class PendingRequests extends Component {
                                 <button
                                   className="button--yes button--padding"  
                                   onClick={() => {
-                                    alert(`You gave ${book.title} to ${book.requestedBy.username}.`);
+                                    alert(`Sending ${book.title} to ${book.requestedBy.username}.`);
                                     acceptBookRequest({
                                       variables: { id: book.id, requestedBy: book.requestedBy.id },
                                       refetchQueries: [{ 

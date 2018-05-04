@@ -2,7 +2,22 @@
 All Components
 */
 
-body {
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {  
+  position: relative;
+  margin: 0;
+  padding-bottom: 8px;
+  min-height: 100%;
   font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -281,7 +296,7 @@ about
 */
 
 .about--container {
-  
+  padding: 16px;
 }
 
 .about--container h3 {
@@ -290,17 +305,36 @@ about
   padding: 8px 0;
 }
 
+.about--container li {
+  padding: 8px 0;
+  border-bottom: 1px solid lightgray;
+}
+
+.about--container ul {
+  padding: 8px 0;
+}
+
+.about--container a {
+  color: blue;
+}
+
 /*
 footer 
 */
 
 .footer--container {
-  position: fixed;
-  bottom: 0px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
   padding: 8px 16px;
   color: black;
+  background: white;
+  width: 100%;
 }
 
 .footer--container a {
   color: black;
+  float: right;
+  margin-left: 16px;
 }
