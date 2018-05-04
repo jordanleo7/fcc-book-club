@@ -7,13 +7,13 @@ import gql from "graphql-tag";
 class SignedInUser extends Component {
 
   SignedInUser() {
-    if (this.props.signedInUsersBooks.loading || this.props.signedInUser.loading) return <p className="loading">Loading</p>;
+    if (this.props.signedInUsersBooks.loading || this.props.signedInUser.loading) return null;
     if (this.props.signedInUsersBooks.error || this.props.signedInUser.error) return <p className="error">Error</p>;
-    if (this.props.signedInUsersBooks && this.props.signedInUser) {
+    if (this.props.signedInUsersBooks.signedInUsersBooks && this.props.signedInUser.signedInUser) {
     console.log(this.props,'signedInUsersBooks:',this.props.signedInUsersBooks.signedInUsersBooks, 'signedInUser:',this.props.signedInUser.signedInUser);
 
       let pendingRequestsBadge = this.props.signedInUsersBooks.signedInUsersBooks.filter(
-        (x, i) => (x.requestedBy)
+        (x, i) => {console.log(x.requestedBy); (x.requestedBy)}
       )
       console.log(pendingRequestsBadge.length);
 
@@ -21,7 +21,7 @@ class SignedInUser extends Component {
         <div className="nav--right">
           <span className="nav--requests">
             Requests: 
-            { pendingRequestsBadge.length ? <span className="pendingRequestsBadge">{pendingRequestsBadge.length}</span> : 0 }
+            { pendingRequestsBadge.length ? <span className="pendingRequestsBadge">{pendingRequestsBadge.length}</span> : <span>0</span> }
           </span>
           <span><Link to={"/profile"}>{this.props.signedInUser.signedInUser.username}'s Profile
 

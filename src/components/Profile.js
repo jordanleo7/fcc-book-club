@@ -9,7 +9,7 @@ class Profile extends Component {
   SignedInUser() {
     if (this.props.signedInUsersBooks.loading || this.props.signedInUser.loading) return <p className="loading">Loading</p>;
     if (this.props.signedInUsersBooks.error || this.props.signedInUser.error) return <p className="error">Error</p>;
-    if (this.props.signedInUsersBooks && this.props.signedInUser) {
+    if (this.props.signedInUsersBooks.signedInUsersBooks && this.props.signedInUser.signedInUser) {
 
       return (
         <div className="profile--container">
@@ -49,6 +49,7 @@ class Profile extends Component {
                                 <button
                                   className="button--yes button--padding"  
                                   onClick={() => {
+                                    alert(`You gave ${book.title} to ${book.requestedBy.username}.`);
                                     acceptBookRequest({
                                       variables: { id: book.id, requestedBy: book.requestedBy.id },
                                       refetchQueries: [{ 
@@ -68,6 +69,7 @@ class Profile extends Component {
                                 <button
                                   className="button--no button--padding float-right" 
                                   onClick={() => {
+                                    alert(`${book.requestedBy.username}'s request has been declined`);
                                     console.log('decline request', book);
                                     denyBookRequest({
                                       variables: { id: book.id },

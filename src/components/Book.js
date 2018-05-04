@@ -44,9 +44,11 @@ const Book = (props) => (
             </ul>
             <Mutation mutation={requestBook}>
                 {(requestBook) => (
+                  <div>
                   <button 
                     className="button--yes button--padding"
                     onClick={() => {
+                      alert(`You have requested ${data.book.title} from ${data.book.ownedBy.username}.`);
                       console.log('request', data);
                       requestBook({
                         variables: { id: data.book.id }
@@ -55,6 +57,9 @@ const Book = (props) => (
                   >
                     Request
                   </button>
+                  {loading && <p>Loading...</p>}
+                  {error && <p>Error :( Please try again</p>}
+                  </div>
                 )}
               </Mutation>
               {" "}this book from {data.book.ownedBy.username}
@@ -66,4 +71,3 @@ const Book = (props) => (
 );
 
 export default graphql(requestBook)(Book)
-//export default Book
