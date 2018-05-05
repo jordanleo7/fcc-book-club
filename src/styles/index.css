@@ -223,9 +223,10 @@ all books
 .book--placeholder-book-cover {
   height: 150px;
   width: 100px;
-  background: navy;
+  background: tan;
+  border-left: 5px solid rgb(187, 160, 125);
   margin: 0 auto;
-  color: white;
+  color: black;
   text-align: center;
 }
 
